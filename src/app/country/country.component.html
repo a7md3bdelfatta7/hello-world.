@@ -1,0 +1,63 @@
+<bootstrap-panel>
+    <ng-container class='heading'>Header</ng-container>
+    <div class='body'>
+      <h1>Body h1 </h1>
+      <p>This is paragraph</p>
+    </div>  
+</bootstrap-panel>
+
+<div class="col-md-12 forecastWidget" *ngIf="isDataAvailable">
+  <div class="col-md-12">
+    <div class="forecast-table">
+      <div class="forecast-container">
+        <div class="today forecast">
+          <div class="forecast-header">
+            <div class="day">{{countryLocalTime | date:'EEEE'}}</div>
+            <div class="date">{{countryLocalTime | date:'d MMM'}}</div>
+          </div>
+          <!-- .forecast-header -->
+          <div class="forecast-content">
+            <div class="location">{{user.country}}-{{user.city}}</div>
+            <div class="degree">
+              <div class="num">{{weatherInfo.temp_C}}<sup>o</sup>C</div>
+              <div class="forecast-icon">
+                <img [src]="currentWeatherIconUrl">
+              </div>
+            </div>
+            <span><img src="assets/images/icon-umberella.png" alt="">{{weatherInfo.precipMM}}%</span>
+            <span><img src="assets/images/icon-wind.png" alt="">{{weatherInfo.windspeedKmph}}km/h</span>
+            <span><img src="assets/images/icon-compass.png" alt="">{{weatherInfo.winddir16Point}}</span>
+            <div style="margin:25px;font-size:17px;border-top:4px solid #262936; ">
+              <div style="padding:10px;" class="col-md-4 text-center">pressure <br>{{weatherInfo.pressure}} mb</div>
+              <div style="background:#262936;padding:10px;" class="col-md-4 text-center">visibility <br> {{weatherInfo.visibility}} km</div>
+              <div style="padding:10px;" class="col-md-4 text-center">Humidity <br> {{weatherInfo.humidity}}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="forecast" *ngFor="let weatherDay of weatherForecast">
+          <div class="forecast-header">
+            <div class="day">
+              {{weatherDay.date | date: 'EEEE'}}
+            </div>
+          </div>
+          <!-- .forecast-header -->
+          <div class="forecast-content">
+            <div class="degree">{{weatherDay.maxtempC}}<sup>o</sup>C</div>
+            <small>{{weatherDay.mintempC}}<sup>o</sup></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12" *ngIf="isDataAvailable">
+  <input type="text" class="citySearch" placeholder="Enter City Name" (keyup)="searchCity($event.target.value)">
+  <h3>{{user.country}} Cities</h3>
+  <div class="citiesBoxContainer row">
+    <div class="cityBox col-xs-12 col-md-3" (click)="selectCity(city)" *ngFor="let city of filteredCities">
+      <a class="thumbnail">
+        {{city.city}}
+      </a>
+    </div>
+  </div>
+</div>

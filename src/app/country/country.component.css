@@ -1,0 +1,31 @@
+.cityBox .thumbnail{
+  color: #000;
+  padding: 20px;
+  font-size: 17px;
+  text-decoration: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+}
+
+.cityBox .thumbnail:hover{
+  background: #323544;
+  color:white;
+}
+
+.citySearch{
+  width:100%;
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  color: #000;
+}
+
+@media screen and (max-width: 570px) {
+  .forecast-container .forecast {
+    width: 100%;
+  }
+  .forecast-container[_ngcontent-c1] .forecast[_ngcontent-c1] .forecast-header[_ngcontent-c1]{
+    background: rgb(63, 60, 73);
+  }
+}

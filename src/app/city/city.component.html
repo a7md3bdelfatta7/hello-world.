@@ -1,0 +1,113 @@
+<div class="col-md-12" *ngIf="isDataAvailiable">
+  <h2 class="cityHeader">{{selectedCity.city}} Weather</h2>
+  <div>
+    <!-- tabs with custom heading templates -->
+    <tabset>
+      <tab>
+        <span *tabHeading>
+                 <b style="color: deepskyblue">Now</b>
+             </span>
+        <div  class="col-md-12 weatherNowContainer">
+          <div class="col-md-12">
+            <div class="forecast-table" style="margin-top:10px;color:#fff;">
+              <div class="forecast-container">
+                <div class="today forecast">
+                  <!-- .forecast-header -->
+                  <div class="forecast-content">
+                    <div class="location">Weather is {{weatherInfo.weatherDesc[0].value}} in {{selectedCity.city}}</div>
+                    <div class="degree">
+                      <div class="num">{{weatherInfo.temp_C}}<sup>o</sup>C</div>
+                      <div class="forecast-icon">
+                        <img [src]="weatherInfo.weatherIconUrl[0].value">
+                      </div>
+                    </div>
+                    <span><img src="assets/images/icon-umberella.png" alt="">{{weatherInfo.precipMM}}%</span>
+                    <span><img src="assets/images/icon-wind.png" alt="">{{weatherInfo.windspeedKmph}}km/h</span>
+                    <span><img src="assets/images/icon-compass.png" alt="">{{weatherInfo.winddir16Point}}</span>
+                    <div style="margin:25px;font-size:17px;border-top:4px solid #262936; ">
+                      <div style="padding:10px;" class="col-md-4 text-center">pressure <br>{{weatherInfo.pressure}}</div>
+                      <div style="background:#262936;padding:10px;" class="col-md-4 text-center">visibility <br> {{weatherInfo.visibility}}</div>
+                      <div style="padding:10px;" class="col-md-4 text-center">Humidity <br> {{weatherInfo.humidity}}%</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="forecast" *ngFor="let weatherDay of weatherForecast; let i=index">
+                  <div class="forecast-header">
+                    <div class="day">
+                      {{weatherDay.date | date: 'EEEE'}}
+                    </div>
+                  </div>
+                  <!-- .forecast-header -->
+                  <div class="forecast-content">
+                    <div class="degree">{{weatherDay.maxtempC}}<sup>o</sup>C</div>
+                    <small>{{weatherDay.mintempC}}<sup>o</sup></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <h3>Temperature Forecast for Next Two Weeks</h3>
+            <nvd3 [options]="options" [data]="data"></nvd3>
+          </div>
+        </div>
+      </tab>
+      <tab>
+
+        <span *tabHeading>
+                 <b style="color: deepskyblue">Average</b> 
+        </span>
+
+        <div class="col-md-12" id="averageWeatherContainer">
+          <h3 style="padding:5px;margin-bottom:15px;">Monthly Temperature Average In {{selectedCity.city}}</h3>
+          <div id="barChartConatiner" class="col-md-7" style="margin-top:35px;">
+            <div style="display: block;">
+              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [chartType]="barChartType" [legend]="barChartLegend"
+                [options]="barChartOptions" [colors]="barChartColors">
+              </canvas>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <table class='table table-striped'>
+              <tr>
+                <th>Month</th>
+                <th>Max Tempreture <sup>o</sup>C</th>
+                <th>Min Tempreture <sup>o</sup>C</th>
+                <th>Average Daily Rainfall</th>
+              </tr>
+              <tr *ngFor="let month of ClimateAverages">
+                <td>{{month.name}}</td>
+                <td>{{month.absMaxTemp}}</td>
+                <td>{{month.avgMinTemp}}</td>
+                <td>{{month.avgDailyRainfall}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <tab>
+        <span *tabHeading>
+          <b style="color: deepskyblue">History</b> 
+      </span>
+        <div class="col-md-12" style="color:#000;background:#fff;border-radius:5px;padding:15px;">
+          <div class="col-md-9">
+            <h4>Select Year and month to get a Tempreture.</h4>
+          </div>
+          <div class='col-md-3'>
+            <select [ngModel]="selectedMonth" (change)="onMonthChange($event.target.value)" class="form-control">
+              <option *ngFor="let month of months">{{month}}</option>  
+           </select>
+            <select [ngModel]="selectedYear" (change)="onYearChange($event.target.value)" class="form-control">
+              <option *ngFor="let year of years">{{year}}</option>  
+           </select>
+            <div (click)="drawHistoryInfo()" class="btn btn-primary form-control">Draw</div>
+          </div>
+          <canvas baseChart height="90" [datasets]="lineChartData" [labels]="lineChartLabels"  [options]="lineChartOptions" [chartType]="lineChartType"></canvas>
+          <div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+            <button id="toggleButton" (click)="randomizeType()" style="display: inline-block;color:#000;">Change Chart</button>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+</div>

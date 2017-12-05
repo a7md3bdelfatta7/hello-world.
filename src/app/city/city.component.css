@@ -1,0 +1,50 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.cityHeader{
+    margin:0px;
+    padding:15px;
+    background: #323544;
+    border-radius: 0px 0px 5px 5px;
+   font-size: 24px;
+}
+.weatherNowContainer{
+    background:#fff;color:#000;border-radius:5px;
+}
+
+.nav-tabs{
+    border-bottom: 1px solid #0e88b2;    
+}
+.nav-tabs>li>a:hover{border-color:#0e88b2 #0e88b2 #0e88b2;}
+.nav-tabs>li{
+    width:33.3333%;
+}
+.table{
+    border-radius: 5px;
+    color:#000;  
+    text-align: center;  
+}
+.tab{
+    background: red;
+}
+
+#averageWeatherContainer{
+    background:#fff;padding:10px;border-radius:5px;color:#000;
+}
+
+@media(max-width:570px){
+    .weatherNowContainer{
+        padding: 10px;
+    }
+
+    .forecast-container .forecast {
+        width: 100%;
+    }
+    .forecast-container[_ngcontent-c1] .forecast[_ngcontent-c1] .forecast-header[_ngcontent-c1],
+    .forecast-container .forecast .forecast-header{
+        background: rgb(63, 60, 73);
+    }
+}
+
