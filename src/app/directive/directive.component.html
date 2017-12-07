@@ -1,0 +1,6 @@
+<button (click)="loadCourses()">Load Courses</button>
+<ul >
+  <li *ngFor="let course of courses;trackBy:trackCourse">
+    {{course.id}} - {{course.name}}
+  </li>
+</ul>

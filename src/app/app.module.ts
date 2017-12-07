@@ -12,13 +12,15 @@ import { DatePipe } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 import { NvD3Module } from 'ng2-nvd3';
 import { BootstrapPanelComponent } from './bootstrap-panel/bootstrap-panel.component';
+import { DirectiveComponent } from './directive/directive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryComponent,
     CityComponent,
-    BootstrapPanelComponent
+    BootstrapPanelComponent,
+    DirectiveComponent
   ],
   imports: [
     BrowserModule, HttpModule, JsonpModule, FormsModule, TabsModule, ChartsModule, NvD3Module,
